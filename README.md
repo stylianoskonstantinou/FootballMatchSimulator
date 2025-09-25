@@ -76,6 +76,3 @@ Through this project, concepts such as object-oriented programming, collections 
 Stylianos Konstantinou  
 Postgraduate student in Applied Informatics, Department of Electrical and Computer Engineering, University of Thessaly.
 
-## About
-
-A football match simulator in Java, developed as a postgraduate project at the University of Thessaly, demonstrating object-oriented programming and basic match simulation.

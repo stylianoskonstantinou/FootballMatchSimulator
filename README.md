@@ -1,8 +1,7 @@
-# Football Match Simulator - Master's Project
-
+# Football Match Simulator 
 ## Description
 
-This project is a football match simulator implemented in Java as part of my master's thesis at the University of Thessaly. The program creates two football teams, each with 11 players, and simulates a full match consisting of two halves. The simulation is based on each player's skill level and random events, which determine the result of each attack and scoring.
+This project is a football match simulator implemented in Java. The program creates two football teams, each with 11 players, and simulates a full match consisting of two halves. The simulation is based on each player's skill level and random events, which determine the result of each attack and scoring.
 
 Through this project, concepts such as object-oriented programming, collections management, random number generation, and basic game simulation principles are demonstrated.
 

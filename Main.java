@@ -1,53 +1,52 @@
-// Κύρια κλάση που εκκινεί το πρόγραμμα
+// Main class that starts the program
 public class Main {
     public static void main(String[] args) {
+        // Create two teams: Olympiacos (home) and Panathinaikos (away)
+        Team home = new Team("OLYMPIACOS");
+        Team away = new Team("PANATHINAIKOS");
 
-        // Δημιουργία δύο ομάδων: Ολυμπιακός (γηπεδούχος) και Παναθηναϊκός (φιλοξενούμενος)
-        Team home = new Team("ΟΛΥΜΠΙΑΚΟΣ");
-        Team away = new Team("ΠΑΝΑΘΗΝΑΙΚΟΣ");
+        // --- Add players to Olympiacos (home team) ---
+        home.addPlayer(new Player(1, "Antonis Nikopolidis", 38, "GK", 80));        // Goalkeeper
+        home.addPlayer(new Player(2, "Tasos Pantos", 35, "DEF", 55));             // Defender 1
+        home.addPlayer(new Player(3, "Andreas Niniadis", 34, "DEF", 70));         // Defender 2
+        home.addPlayer(new Player(4, "Grigoris Georgatos", 33, "DEF", 87));       // Defender 3
+        home.addPlayer(new Player(5, "Panagiotis Kelesidis", 36, "DEF", 72));     // Defender 4
+        home.addPlayer(new Player(6, "Michalis Kasnaferis", 34, "DEF", 65));      // Defender 5
+        home.addPlayer(new Player(7, "Giovanni Silva de Oliveira", 35, "ATT", 80)); // Attacker 1
+        home.addPlayer(new Player(8, "Predrag Djordjevic", 36, "ATT", 78));       // Attacker 2
+        home.addPlayer(new Player(9, "Alekos Alexandris", 37, "ATT", 82));        // Attacker 3
+        home.addPlayer(new Player(10, "Sergio Conceicao", 34, "ATT", 60));        // Attacker 4
+        home.addPlayer(new Player(11, "Michalis Konstantinou", 33, "ATT", 76));   // Attacker 5
 
-        // --- Προσθήκη παικτών στον Ολυμπιακό (home team) ---
-        home.addPlayer(new Player(1, "Αντώνης Νικοπολίδης", 38, "GK", 80));       // Τερματοφύλακας
-        home.addPlayer(new Player(2, "Τάσος Πάντος", 35, "DEF", 55));             // Αμυντικός 1
-        home.addPlayer(new Player(3, "Ανδρέας Νινιάδης", 34, "DEF", 70));         // Αμυντικός 2
-        home.addPlayer(new Player(4, "Γρηγόρης Γεωργάτος", 33, "DEF", 87));       // Αμυντικός 3
-        home.addPlayer(new Player(5, "Παναγιώτης Κελεσίδης", 36, "DEF", 72));     // Αμυντικός 4
-        home.addPlayer(new Player(6, "Μιχάλης Κασναφέρης", 34, "DEF", 65));       // Αμυντικός 5
-        home.addPlayer(new Player(7, "Τζιοβάνι Σίλβα ντε Ολιβέιρα", 35, "ATT", 80)); // Επιθετικός 1
-        home.addPlayer(new Player(8, "Πρέντραγκ Τζόρτζεβιτς", 36, "ATT", 78));    // Επιθετικός 2
-        home.addPlayer(new Player(9, "Αλέκος Αλεξανδρής", 37, "ATT", 82));        // Επιθετικός 3
-        home.addPlayer(new Player(10, "Σέρτζιο Κονσεϊσάο", 34, "ATT", 60));       // Επιθετικός 4
-        home.addPlayer(new Player(11, "Μιχάλης Κωνσταντίνου", 33, "ATT", 76));    // Επιθετικός 5
+        // --- Add players to Panathinaikos (away team) ---
+        away.addPlayer(new Player(1, "Jozef Wandzik", 38, "GK", 77));             // Goalkeeper
+        away.addPlayer(new Player(2, "Giannis Goumas", 36, "DEF", 75));           // Defender 1
+        away.addPlayer(new Player(3, "Nikos Vyntra", 35, "DEF", 73));             // Defender 2
+        away.addPlayer(new Player(4, "Rene Henriksen", 37, "DEF", 70));           // Defender 3
+        away.addPlayer(new Player(5, "Angelos Basinas", 36, "DEF", 85));          // Defender 4
+        away.addPlayer(new Player(6, "Daniel Sariegi", 34, "DEF", 59));           // Defender 5
+        away.addPlayer(new Player(7, "Christophe Dugarry", 39, "ATT", 77));       // Attacker 1
+        away.addPlayer(new Player(8, "Giorgos Karagounis", 37, "ATT", 81));       // Attacker 2
+        away.addPlayer(new Player(9, "Djibril Cissé", 35, "ATT", 79));            // Attacker 3
+        away.addPlayer(new Player(10, "Fanis Gekas", 36, "ATT", 59));             // Attacker 4
+        away.addPlayer(new Player(11, "Nikos Lymberopoulos", 38, "ATT", 54));     // Attacker 5
 
-        // --- Προσθήκη παικτών στον Παναθηναϊκό (away team) ---
-        away.addPlayer(new Player(1, "Γιόζεφ Βάντσικ", 38, "GK", 77));             // Τερματοφύλακας
-        away.addPlayer(new Player(2, "Γιάννης Γκούμας", 36, "DEF", 75));           // Αμυντικός 1
-        away.addPlayer(new Player(3, "Νίκος Βύντρα", 35, "DEF", 73));              // Αμυντικός 2
-        away.addPlayer(new Player(4, "Ρενέ Χένρικσεν", 37, "DEF", 70));            // Αμυντικός 3
-        away.addPlayer(new Player(5, "Άγγελος Μπασινάς", 36, "DEF", 85));          // Αμυντικός 4
-        away.addPlayer(new Player(6, "Ντάνιελ Σαριέγκι", 34, "DEF", 59));          // Αμυντικός 5
-        away.addPlayer(new Player(7, "Κριστόφ Βαζέχα", 39, "ATT", 77));            // Επιθετικός 1
-        away.addPlayer(new Player(8, "Γιώργος Καραγκούνης", 37, "ATT", 81));       // Επιθετικός 2
-        away.addPlayer(new Player(9, "Τζιμπρίλ Σισέ", 35, "ATT", 79));             // Επιθετικός 3
-        away.addPlayer(new Player(10, "Φάνης Γκέκας", 36, "ATT", 59));             // Επιθετικός 4
-        away.addPlayer(new Player(11, "Νίκος Λυμπερόπουλος", 38, "ATT", 54));      // Επιθετικός 5
-
-        // Δημιουργία της αναμέτρησης μεταξύ των δύο ομάδων
+        // Create the match between the two teams
         Match match = new Match(home, away);
 
-        // Εμφάνιση των συνθέσεων των ομάδων
+        // Print team lineups
         match.printDraft();
 
-        // Έναρξη του αγώνα (πρώτο και δεύτερο ημίχρονο)
+        // Start the game (first and second half)
         match.startGame();
 
-        // Εμφάνιση τελικού σκορ
+        // Print final score
         match.printResults();
 
-        // Εμφάνιση του παίκτη (ή των παιχτών) με τα περισσότερα γκολ
+        // Print player(s) with most goals
         match.printBestOffencePlayer();
 
-        // Εμφάνιση του παίκτη (ή των παιχτών) που νικήθηκε/αν πιο πολλές φορές στην άμυνα
+        // Print player(s) who was beaten most times in defense
         match.printWorstDefencePlayer();
     }
 }

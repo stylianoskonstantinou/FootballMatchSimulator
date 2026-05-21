@@ -1,100 +1,98 @@
 import java.util.*;
 
-// Κλάση που αναπαριστά έναν ποδοσφαιρικό αγώνα ανάμεσα σε δύο ομάδες
+// Class representing a football match between two teams
 public class Match {
-    Team homeTeam;    // Γηπεδούχος ομάδα
-    Team awayTeam;    // Φιλοξενούμενη ομάδα
-    int homeGoals = 0; // Γκολ της γηπεδούχου ομάδας
-    int awayGoals = 0; // Γκολ της φιλοξενούμενης ομάδας
-    Random random = new Random(); // Για τυχαία επιλογή παικτών
+    Team homeTeam;      // Home team
+    Team awayTeam;      // Away team
+    int homeGoals = 0;  // Goals scored by home team
+    int awayGoals = 0;  // Goals scored by away team
+    Random random = new Random(); // For random player selection
 
-    // Constructor – αρχικοποιεί τον αγώνα με τις δύο ομάδες
+    // Constructor – initializes the match with two teams
     public Match(Team homeTeam, Team awayTeam) {
         this.homeTeam = homeTeam;
         this.awayTeam = awayTeam;
     }
 
-    // Εμφανίζει τις συνθέσεις των δύο ομάδων πριν την έναρξη του αγώνα
+    // Displays the lineups of both teams before the match starts
     public void printDraft() {
-        System.out.println("-----Παρουσίαση γηπεδούχου ομάδας: " + homeTeam.name + "-----");
+        System.out.println("----- Home Team Lineup: " + homeTeam.name + " -----");
         for (Player p : homeTeam.players) {
-            System.out.println(p); // Χρήση της toString() του Player
+            System.out.println(p); // Uses Player's toString()
         }
-        System.out.println("-----Παρουσίαση φιλοξενούμενης ομάδας: " + awayTeam.name + "-----");
+        System.out.println("----- Away Team Lineup: " + awayTeam.name + " -----");
         for (Player p : awayTeam.players) {
             System.out.println(p);
         }
     }
 
-    // Ξεκινάει τον αγώνα – περιλαμβάνει δύο ημίχρονα με 5 επιθέσεις ανά ομάδα σε κάθε ένα
+    // Starts the match – includes two halves with 5 attacks per team each half
     public void startGame() {
-        System.out.println("\n----- ΠΡΩΤΟ ΗΜΙΧΡΟΝΟ -----");
+        System.out.println("\n----- FIRST HALF -----");
         for (int i = 0; i < 5; i++) {
-            offense(homeTeam, awayTeam); // Γηπεδούχος επιτίθεται
-            offense(awayTeam, homeTeam); // Φιλοξενούμενος επιτίθεται
+            offense(homeTeam, awayTeam); // Home team attacks
+            offense(awayTeam, homeTeam); // Away team attacks
         }
-
-        System.out.println("\n----- ΔΕΥΤΕΡΟ ΗΜΙΧΡΟΝΟ -----");
+        System.out.println("\n----- SECOND HALF -----");
         for (int i = 0; i < 5; i++) {
             offense(homeTeam, awayTeam);
             offense(awayTeam, homeTeam);
         }
     }
 
-    // Υλοποιεί μία επίθεση από την attacking ομάδα προς την defending ομάδα
+    // Implements an attack from the attacking team against the defending team
     private void offense(Team attacker, Team defender) {
-        // Τυχαίος επιθετικός και αμυντικός από τις αντίστοιχες λίστες
+        // Random attacker and defender from respective lists
         Player attackerPlayer = getRandomPlayer(attacker.getPlayersByPosition("ATT"));
         Player defenderPlayer = getRandomPlayer(defender.getPlayersByPosition("DEF"));
-        Player goalkeeper = defender.getGoalkeeper(); // Τερματοφύλακας της defending ομάδας
+        Player goalkeeper = defender.getGoalkeeper(); // Defender team's goalkeeper
 
-        // Εμφάνιση φάσης στην κονσόλα
-        System.out.println("\n" + attacker.name + " επιτίθεται!");
-        System.out.println("Επιθετικός: " + attackerPlayer.name + " (Ικανότητα " + attackerPlayer.skill + ")");
-        System.out.println("Αμυντικός: " + defenderPlayer.name + " (Ικανότητα " + defenderPlayer.skill + ")");
+        // Display the play phase in the console
+        System.out.println("\n" + attacker.name + " is attacking!");
+        System.out.println("Attacker: " + attackerPlayer.name + " (Skill " + attackerPlayer.skill + ")");
+        System.out.println("Defender: " + defenderPlayer.name + " (Skill " + defenderPlayer.skill + ")");
 
-        // Αν ο επιθετικός έχει μεγαλύτερη ικανότητα από τον αμυντικό
+        // If attacker has higher skill than defender
         if (attackerPlayer.skill > defenderPlayer.skill) {
-            defenderPlayer.timesDefeated++; // Καταγραφή ήττας στον αμυντικό
-            System.out.println("Ο επιθετικός πέρασε τον αμυντικό!!");
+            defenderPlayer.timesDefeated++; // Record defender defeat
+            System.out.println("The attacker got past the defender!!");
 
-            // Αν έχει μεγαλύτερη ικανότητα και από τον τερματοφύλακα
+            // If attacker also has higher skill than goalkeeper
             if (attackerPlayer.skill > goalkeeper.skill) {
-                attackerPlayer.goalsScored++; // Καταγραφή γκολ στον επιθετικό
+                attackerPlayer.goalsScored++; // Record goal for attacker
                 if (attacker == homeTeam) homeGoals++;
                 else awayGoals++;
-                System.out.println("ΓΚΟΛΑΡΑ από τον " + attackerPlayer.name + "!");
+                System.out.println("GOAL by " + attackerPlayer.name + "!");
             } else {
-                System.out.println("Απόκρουση από τον τερματοφύλακα " + goalkeeper.name + "!");
+                System.out.println("Save by goalkeeper " + goalkeeper.name + "!");
             }
         } else {
-            System.out.println("Ο αμυντικός " + defenderPlayer.name + " σταμάτησε την επίθεση.");
+            System.out.println("Defender " + defenderPlayer.name + " stopped the attack.");
         }
     }
 
-    // Επιλέγει τυχαία έναν παίκτη από λίστα
+    // Selects a random player from a list
     private Player getRandomPlayer(List<Player> players) {
         return players.get(random.nextInt(players.size()));
     }
 
-    // Εκτύπωση τελικού σκορ αγώνα
+    // Prints the final match score
     public void printResults() {
-        System.out.println("\n----- Τελικό Σκορ -----");
+        System.out.println("\n----- Final Score -----");
         System.out.println(homeTeam.name + ": " + homeGoals);
         System.out.println(awayTeam.name + ": " + awayGoals);
     }
 
-    // Εμφανίζει τους καλύτερους επιθετικούς κάθε ομάδας
+    // Displays the best attackers of each team
     public void printBestOffencePlayer() {
-        System.out.println("\nΚαλύτεροι επιθετικοί ανά ομάδα:");
+        System.out.println("\nBest attackers per team:");
 
-        // --- ΟΛΥΜΠΙΑΚΟΣ ---
+        // --- HOME TEAM ---
         List<Player> homeAttackers = homeTeam.getPlayersByPosition("ATT");
         int maxHomeGoals = homeAttackers.stream().mapToInt(p -> p.goalsScored).max().orElse(0);
-        System.out.println("ΟΛΥΜΠΙΑΚΟΣ (με " + maxHomeGoals + " γκολ):");
-
+        System.out.println(homeTeam.name + " (with " + maxHomeGoals + " goals):");
         if (maxHomeGoals == 0) {
-            System.out.println("- Κανένας παίκτης δεν σκόραρε.");
+            System.out.println("- No player scored.");
         } else {
             for (Player p : homeAttackers) {
                 if (p.goalsScored == maxHomeGoals) {
@@ -103,13 +101,12 @@ public class Match {
             }
         }
 
-        // --- ΠΑΝΑΘΗΝΑΙΚΟΣ ---
+        // --- AWAY TEAM ---
         List<Player> awayAttackers = awayTeam.getPlayersByPosition("ATT");
         int maxAwayGoals = awayAttackers.stream().mapToInt(p -> p.goalsScored).max().orElse(0);
-        System.out.println("ΠΑΝΑΘΗΝΑΙΚΟΣ (με " + maxAwayGoals + " γκολ):");
-
+        System.out.println(awayTeam.name + " (with " + maxAwayGoals + " goals):");
         if (maxAwayGoals == 0) {
-            System.out.println("- Κανένας παίκτης δεν σκόραρε.");
+            System.out.println("- No player scored.");
         } else {
             for (Player p : awayAttackers) {
                 if (p.goalsScored == maxAwayGoals) {
@@ -119,17 +116,16 @@ public class Match {
         }
     }
 
-    // Εμφανίζει τους χειρότερους αμυντικούς κάθε ομάδας
+    // Displays the worst defenders of each team (most times defeated)
     public void printWorstDefencePlayer() {
-        System.out.println("\nΧειρότεροι αμυντικοί ανά ομάδα:");
+        System.out.println("\nWorst defenders per team:");
 
-        // --- ΟΛΥΜΠΙΑΚΟΣ ---
+        // --- HOME TEAM ---
         List<Player> homeDefenders = homeTeam.getPlayersByPosition("DEF");
         int maxHomeDefeated = homeDefenders.stream().mapToInt(p -> p.timesDefeated).max().orElse(0);
-        System.out.println("ΟΛΥΜΠΙΑΚΟΣ (νικήθηκε/αν " + maxHomeDefeated + " φορές):");
-
+        System.out.println(homeTeam.name + " (defeated " + maxHomeDefeated + " times):");
         if (maxHomeDefeated == 0) {
-            System.out.println("- Κανένας αμυντικός δεν νικήθηκε.");
+            System.out.println("- No defender was defeated.");
         } else {
             for (Player p : homeDefenders) {
                 if (p.timesDefeated == maxHomeDefeated) {
@@ -138,13 +134,12 @@ public class Match {
             }
         }
 
-        // --- ΠΑΝΑΘΗΝΑΙΚΟΣ ---
+        // --- AWAY TEAM ---
         List<Player> awayDefenders = awayTeam.getPlayersByPosition("DEF");
         int maxAwayDefeated = awayDefenders.stream().mapToInt(p -> p.timesDefeated).max().orElse(0);
-        System.out.println("ΠΑΝΑΘΗΝΑΙΚΟΣ (νικήθηκε/αν " + maxAwayDefeated + " φορές):");
-
+        System.out.println(awayTeam.name + " (defeated " + maxAwayDefeated + " times):");
         if (maxAwayDefeated == 0) {
-            System.out.println("- Κανένας αμυντικός δεν νικήθηκε.");
+            System.out.println("- No defender was defeated.");
         } else {
             for (Player p : awayDefenders) {
                 if (p.timesDefeated == maxAwayDefeated) {
